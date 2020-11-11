@@ -12,6 +12,7 @@ const ProductType = new GraphQLObjectType({
         author: {type: GraphQLString},
         genero: {type: GraphQLString},
         imageUrl: {type: GraphQLString},
+        themeColor: {type: GraphQLString},
         description:{type: GraphQLString},
         productGroup: {
             type: ProductGroupType,

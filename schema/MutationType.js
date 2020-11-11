@@ -27,6 +27,7 @@ const MutationType = new GraphQLObjectType({
                 author: {type: GraphQLString},
                 genero: {type: GraphQLString},
                 imageUrl: {type:GraphQLString},
+                themeColor: {type:GraphQLString},
                 description: {type: GraphQLString},
                 productGroupId: {type: GraphQLID}
             },
@@ -43,6 +44,7 @@ const MutationType = new GraphQLObjectType({
                 author: {type: GraphQLString},
                 genero: {type: GraphQLString},
                 imageUrl: {type:GraphQLString},
+                themeColor: {type:GraphQLString},
                 description: {type: GraphQLString},
                 productGroupId: {type: GraphQLID}
             },

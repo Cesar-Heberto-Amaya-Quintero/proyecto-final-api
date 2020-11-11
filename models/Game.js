@@ -7,7 +7,8 @@ const GameSchema = new Schema({
     author:String,
     genero: String,
     imageUrl: String,
-    description: String,
+    themeColor: String,
+    description: String, 
     productGroupId: String
 });
 
