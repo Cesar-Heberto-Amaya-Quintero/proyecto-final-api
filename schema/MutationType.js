@@ -1,6 +1,6 @@
 import graphql from 'graphql';
 import Game from '../models/Game.js';
-import ProductGroup from '../models/ProductGroup.js';
+import GameGenero from '../models/GameGenero.js';
 
 import ProductGroupType from './ProductGroupType.js';
 import ProductType from './ProductType.js';
@@ -25,11 +25,10 @@ const MutationType = new GraphQLObjectType({
             args: {
                 name: {type: GraphQLString},
                 author: {type: GraphQLString},
-                genero: {type: GraphQLString},
                 imageUrl: {type:GraphQLString},
                 themeColor: {type:GraphQLString},
                 description: {type: GraphQLString},
-                productGroupId: {type: GraphQLID}
+                gameGeneroId: {type: GraphQLID}
             },
             resolve(parent, args){
                 let game = new Game(args);
@@ -42,11 +41,10 @@ const MutationType = new GraphQLObjectType({
                 id: {type: GraphQLID},
                 name: {type: GraphQLString},
                 author: {type: GraphQLString},
-                genero: {type: GraphQLString},
                 imageUrl: {type:GraphQLString},
                 themeColor: {type:GraphQLString},
                 description: {type: GraphQLString},
-                productGroupId: {type: GraphQLID}
+                gameGeneroId: {type: GraphQLID}
             },
             resolve(parent, args){
 
@@ -61,17 +59,17 @@ const MutationType = new GraphQLObjectType({
             }
         },
         //Game group
-        addProductGroup: {
+        addGameGenero: {
             type: ProductGroupType,
             args: {
                 name: {type: GraphQLString}
             },
             resolve(parent, args){
-                const productGroup = new ProductGroup(args);
-                return productGroup.save();
+                const gameGenero = new GameGenero(args);
+                return gameGenero.save();
             }
         },
-        editProductGroup: {
+        editGameGenero: {
             type: ProductGroupType,
             args: {
                 id: {type: GraphQLID},
@@ -79,14 +77,14 @@ const MutationType = new GraphQLObjectType({
             },
             resolve(parent, args){
 
-                return ProductGroup.findByIdAndUpdate(args.id, args);
+                return GameGenero.findByIdAndUpdate(args.id, args);
             }
         },
-        deleteProductGroup: {
+        deleteGameGenero: {
             type: ProductGroupType,
             args: {id: {type: GraphQLID}},
             resolve(parent, args){
-                return ProductGroup.findByIdAndRemove(args.id);
+                return GameGenero.findByIdAndRemove(args.id);
             }
         },
         //User

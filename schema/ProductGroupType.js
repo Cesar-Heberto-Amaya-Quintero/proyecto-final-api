@@ -5,18 +5,18 @@ import Game from '../models/Game.js';
 const {GraphQLID, GraphQLString, GraphQLObjectType, GraphQLList} = graphql;
 
 
-const ProductGroupType = new GraphQLObjectType({
-    name: 'ProductGroup',
+const GameGeneroType = new GraphQLObjectType({
+    name: 'GameGenero',
     fields: ()=>({
         id: {type: GraphQLID},
         name: {type: GraphQLString},
-        products: {
+        games: {
             type: new GraphQLList(ProductType),
             resolve(parent, args){
-                return Game.find({productGroupId: parent.id});
+                return Game.find({gameGeneroId: parent.id});
             }
         }
     })
 });
 
-export default ProductGroupType;
+export default GameGeneroType;

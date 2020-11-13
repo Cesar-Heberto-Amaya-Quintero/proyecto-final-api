@@ -5,11 +5,10 @@ const {Schema} = mongoose;
 const GameSchema = new Schema({
     name: String,
     author:String,
-    genero: String,
     imageUrl: String,
     themeColor: String,
     description: String, 
-    productGroupId: String
+    gameGeneroId: String
 });
 
 export default mongoose.model('Game', GameSchema);

@@ -1,7 +1,7 @@
 import graphql from 'graphql';
 
 import Game from '../models/Game.js';
-import ProductGroup from '../models/ProductGroup.js';
+import GameGenero from '../models/GameGenero.js';
 import User from '../models/User.js';
 import Address from '../models/Address.js';
 
@@ -42,17 +42,17 @@ const RootQueryType = new GraphQLObjectType({
                 return Game.find({productGroupId: args.groupId});
             }
         },
-        productGroup: {
+        gameGenero: {
             type: ProductGroupType,
             args: {id: {type: GraphQLID}},
             resolve(parent, args){
-                return ProductGroup.findById(args.id);
+                return GameGenero.findById(args.id);
             }
         },
-        productGroups: {
+        gameGeneros: {
             type: new GraphQLList(ProductGroupType),
             resolve(parent, args){
-                return ProductGroup.find();
+                return GameGenero.find();
             }
         },
         //users

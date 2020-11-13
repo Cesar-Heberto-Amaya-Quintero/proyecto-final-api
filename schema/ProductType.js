@@ -1,6 +1,6 @@
 import graphql from 'graphql';
 import ProductGroupType from './ProductGroupType.js';
-import ProductGroup from '../models/ProductGroup.js';
+import GameGenero from '../models/GameGenero.js';
 
 const {GraphQLID, GraphQLString, GraphQLObjectType} = graphql;
 
@@ -10,14 +10,13 @@ const ProductType = new GraphQLObjectType({
         id: {type: GraphQLID},
         name: {type: GraphQLString},
         author: {type: GraphQLString},
-        genero: {type: GraphQLString},
         imageUrl: {type: GraphQLString},
         themeColor: {type: GraphQLString},
         description:{type: GraphQLString},
-        productGroup: {
+        gameGenero: {
             type: ProductGroupType,
             resolve(parent, args){
-                return ProductGroup.findById(parent.productGroupId);
+                return GameGenero.findById(parent.gameGeneroId);
             }
         }
     })
