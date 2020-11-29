@@ -5,17 +5,15 @@ import GameGenero from '../models/GameGenero.js';
 import UploadsFiles from '../models/UploadsFiles.js';
 import User from '../models/User.js';
 import Address from '../models/Address.js';
-import picsdemo from '../models/picsdemo.js';
 
 import ProductGroupType from './ProductGroupType.js';
 import ProductType from './ProductType.js';
 import FileType from './FileType.js';
 import UserType from './UserType.js';
 import AddressType from './AddressType.js';
-import picsdemoType from './picsdemoType.js';
-
 import OrderType from './OrderType.js';
 import Order from '../models/Order.js';
+
 
 
 const {GraphQLID, GraphQLObjectType, GraphQLList} = graphql;
