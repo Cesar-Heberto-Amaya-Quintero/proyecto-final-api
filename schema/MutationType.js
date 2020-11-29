@@ -12,6 +12,8 @@ import OrderType from './OrderType.js';
 import Order from '../models/Order.js';
 import SaleType from './SaleType.js';
 import Sale from '../models/Sale.js';
+import FileType from './FileType.js';
+import UploadsFiles from '../models/UploadsFiles.js';
 
 const {GraphQLID, GraphQLString, GraphQLFloat,GraphQLObjectType} = graphql;
 
@@ -86,6 +88,22 @@ const MutationType = new GraphQLObjectType({
             resolve(parent, args){
                 return GameGenero.findByIdAndRemove(args.id);
             }
+        },
+        addUploadsFile: {
+            type: FileType,
+            args: {
+                lenght: {type: GraphQLString},
+                chunkSize: {type: GraphQLString},
+                uploadDate: {type: GraphQLString},
+                filename: {type: GraphQLString},
+                md5: {type: GraphQLString},
+                contentType: {type: GraphQLString}
+            },
+            resolve(parent, args) {
+                let file = new UploadsFiles(args);
+                return file.save();
+            }
+
         },
         //User
         addUser: {
