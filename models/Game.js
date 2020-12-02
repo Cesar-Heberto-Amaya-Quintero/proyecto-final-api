@@ -8,7 +8,8 @@ const GameSchema = new Schema({
     imageUrl: String,
     themeColor: String,
     description: String, 
-    gameGeneroId: String
+    gameGeneroId: String,
+    filePath: String,
 });
 
 export default mongoose.model('Game', GameSchema);

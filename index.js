@@ -8,19 +8,22 @@ import bodyParser from 'body-parser';
 import multer from 'multer';
 import path from 'path';
 
+import fileUpload from 'express-fileupload';
+
 //librerias file upload
 /*
 var bodyParser = require('body-parser');
 var multer =  require('multer');
-var path = require('path');
-*/
+var path = require('path');*/
 
 
 const {graphqlHTTP} = expressGraphql;
 
 const port = 5000;
-const __dirname = path.resolve();
-//fileupload
+
+
+//const __dirn//fileupload
+const __dirname = path.resolve(path.dirname(''));
 
 var picSchema= new mongoose.Schema({
     picpath:String
@@ -37,8 +40,8 @@ var storage = multer.diskStorage({
     }
 })
 var upload = multer({storage:storage})
-
 //fileupload
+
 
 const app= express();
 
@@ -56,12 +59,45 @@ mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: t
 app.use('/graphql', graphqlHTTP({
     schema: Schema,
     graphiql: true
+
 }));
 
-//fileupload
-app.set('views',path.resolve(__dirname,'views'));
-app.set('view engine','jsx');
+//new
+app.use(express.static('public'))
+app.use(cors())
+app.use(fileUpload());
 
+app.post('/upload', (req, res) => {
+
+    if (!req.files) {
+        return res.status(500).send({ msg: "file is not found" })
+    }
+
+    const myFile = req.files.file;
+
+    // Use the mv() method to place the file somewhere on your server
+    myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
+        if (err) {
+            console.log(err)
+            return res.status(500).send({ msg: "fuck eroor" });
+        }
+        return res.send({ file: myFile.name, path: `/${myFile.name}`, ty: myFile.type });
+    });
+})
+
+
+
+
+//fileupload
+/*
+app.set('views',path.resolve(__dirname,'views'));
+app.set('view engine','ejs');
+*/
+/*
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jsx');
+app.engine('jsx', require('express-react-views').createEngine());*/
+/*
 var pathh = path.resolve(__dirname,'public');
 app.use(express.static(pathh));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -105,7 +141,88 @@ app.get('/download/:id',(req,res)=>{
          }
     })
 })
+*/
 //fileupload
+//app.listen(port, console.log(`listening at: http://localhost:${port}/graphql`));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

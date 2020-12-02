@@ -13,6 +13,7 @@ const ProductType = new GraphQLObjectType({
         imageUrl: {type: GraphQLString},
         themeColor: {type: GraphQLString},
         description:{type: GraphQLString},
+        filePath: {type: GraphQLString},
         gameGenero: {
             type: ProductGroupType,
             resolve(parent, args){

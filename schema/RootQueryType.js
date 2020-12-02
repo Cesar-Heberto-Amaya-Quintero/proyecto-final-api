@@ -2,17 +2,17 @@ import graphql from 'graphql';
 
 import Game from '../models/Game.js';
 import GameGenero from '../models/GameGenero.js';
-import UploadsFiles from '../models/UploadsFiles.js';
-import User from '../models/User.js';
-import Address from '../models/Address.js';
+//import PicsDemos from '../models/PicsDemos.js';
+
 
 import ProductGroupType from './ProductGroupType.js';
 import ProductType from './ProductType.js';
-import FileType from './FileType.js';
-import UserType from './UserType.js';
-import AddressType from './AddressType.js';
-import OrderType from './OrderType.js';
-import Order from '../models/Order.js';
+//import PicsDemosType from './PicsDemosType.js';
+
+import FileUpload from '../models/FileUpload.js';
+import FileUploadType from './FileUploadType.js';
+
+
 
 
 
@@ -57,49 +57,20 @@ const RootQueryType = new GraphQLObjectType({
                 return GameGenero.find();
             }
         },
-        file: {
-            type: FileType,
-            args: {id: {type: GraphQLID}},
+        filesuploads: {
+            type: new GraphQLList(FileUploadType),
             resolve(parent, args){
-                return UploadsFiles.findById(args.id);
-            }
-        },
-        files: {
-            type: new GraphQLList(FileType),
-            args: {groupId: {type: GraphQLID}},
-            resolve(parent, args){
-                return UploadsFiles.find();
-            }
-        },
-
-        //users
-        users: {
-            type: new GraphQLList(UserType),
-            resolve(parent, args){
-                return User.find();
-            }
-        },
-        //addresses
-        addresses: {
-            type: new GraphQLList(AddressType),
-            resolve(parent, args){
-                return Address.find();
-            }
-        },
-        //orders
-        order: {
-            type: OrderType,
-            args: {id: {type: GraphQLID}},
-            resolve(parent, args){
-                return Order.findById(args.id);
-            }
-        },
-        orders: {
-            type: new GraphQLList(OrderType),
-            resolve(parent, args){
-                return Order.find();
+                return FileUpload.find();
             }
         }
+        /*picsdemos: {
+            type: new GraphQLList(PicsDemosType),
+            resolve(parent, args)
+            {
+                return PicsDemos.find();
+            }
+        }*/
+
     }   
 });
 

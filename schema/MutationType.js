@@ -4,16 +4,11 @@ import GameGenero from '../models/GameGenero.js';
 
 import ProductGroupType from './ProductGroupType.js';
 import ProductType from './ProductType.js';
-import UserType from './UserType.js';
-import AddressType from './AddressType.js';
-import User from '../models/User.js';
-import Address from '../models/Address.js';
-import OrderType from './OrderType.js';
-import Order from '../models/Order.js';
-import SaleType from './SaleType.js';
-import Sale from '../models/Sale.js';
-import FileType from './FileType.js';
-import UploadsFiles from '../models/UploadsFiles.js';
+
+import FileUpload from '../models/FileUpload.js';
+import FileUploadType from './FileUploadType.js';
+
+
 
 const {GraphQLID, GraphQLString, GraphQLFloat,GraphQLObjectType} = graphql;
 
@@ -30,6 +25,7 @@ const MutationType = new GraphQLObjectType({
                 imageUrl: {type:GraphQLString},
                 themeColor: {type:GraphQLString},
                 description: {type: GraphQLString},
+                filePath: {type: GraphQLString},
                 gameGeneroId: {type: GraphQLID}
             },
             resolve(parent, args){
@@ -46,6 +42,7 @@ const MutationType = new GraphQLObjectType({
                 imageUrl: {type:GraphQLString},
                 themeColor: {type:GraphQLString},
                 description: {type: GraphQLString},
+                filePath: {type: GraphQLString},
                 gameGeneroId: {type: GraphQLID}
             },
             resolve(parent, args){
@@ -89,75 +86,20 @@ const MutationType = new GraphQLObjectType({
                 return GameGenero.findByIdAndRemove(args.id);
             }
         },
-        addUploadsFile: {
-            type: FileType,
+        addFile: {
+            type: FileUploadType,
             args: {
-                lenght: {type: GraphQLString},
-                chunkSize: {type: GraphQLString},
-                uploadDate: {type: GraphQLString},
-                filename: {type: GraphQLString},
-                md5: {type: GraphQLString},
-                contentType: {type: GraphQLString}
-            },
-            resolve(parent, args) {
-                let file = new UploadsFiles(args);
-                return file.save();
-            }
-
-        },
-        //User
-        addUser: {
-            type: UserType,
-            args: {
-                firstName: {type: GraphQLString},
-                secondName: {type: GraphQLString},
-                phoneNumber: {type: GraphQLString},
-                birthDay: {type: GraphQLString},
-                email: {type: GraphQLString},
-                addressId: {type: GraphQLID}
+                name: {type: GraphQLString},
+                path: {type: GraphQLString}
             },
             resolve(parent, args){
-                const user = new User(args);
-                return user.save();
-            }
-        },
-        //Address
-        addAddress: {
-            type: AddressType,
-            args: {
-                streetName: {type: GraphQLString},
-                city: {type: GraphQLString},
-                cpNumber: {type: GraphQLString},
-                userId: {type: GraphQLID}
-            },
-            resolve(parent, args){
-                const address = new Address(args);
-                return address.save();
-            }
-        },
-        //orders
-        addOrder: {
-            type: OrderType,
-            args:{userId: {type: GraphQLID}},
-            resolve(parent, args){
-                const order = new Order(args);
-                return order.save();
-            }
-        },
-        //sales
-        addSales: {
-            type: SaleType,
-            args: {
-                productId: {type: GraphQLID},
-                orderId: {type: GraphQLID},
-                timeStamp: {type: GraphQLString}
-            },
-            resolve(parent, args){
-                const sale = new Sale(args);
-                return sale.save();
+                const fileUpload = new FileUpload(args);
+                return fileUpload.save();
             }
         }
-    }
+
+    },
+
 });
 
 export default MutationType;
